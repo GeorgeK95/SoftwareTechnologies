@@ -1,1 +1,2 @@
-All my stuff from programming fundamentals course in SoftUni goes here.
+# SoftwareTechnologies
+All my stuff from Software Technologies course in SoftUni here.
