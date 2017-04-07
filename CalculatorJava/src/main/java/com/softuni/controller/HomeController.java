@@ -1,6 +1,6 @@
 package com.softuni.controller;
 
-import com.softuni.entity.Calculator;
+import com.softuni.models.Calculator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

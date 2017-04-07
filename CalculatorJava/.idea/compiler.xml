@@ -6,13 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="CalculatorJava" />
-        <module name="sumator" />
+        <module name="calculator" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="CalculatorJava" target="1.8" />
-      <module name="sumator" target="1.8" />
+      <module name="calculator" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

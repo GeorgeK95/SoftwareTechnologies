@@ -1,4 +1,4 @@
-package com.softuni.entity;
+package com.softuni.models;
 
 /**
  * Created by George-Lenovo on 4/7/2017.
