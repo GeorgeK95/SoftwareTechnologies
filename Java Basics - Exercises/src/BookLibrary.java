@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by George-Lenovo on 4/7/2017.
@@ -9,7 +6,7 @@ import java.util.Scanner;
 public class BookLibrary {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int n = in.nextInt();
+        int n = Integer.parseInt(in.nextLine());
         Library library = new Library("Ivan Vazov");
 
         for (int i = 0; i < n; i++)
@@ -50,13 +47,35 @@ public class BookLibrary {
         }
     }
 
-    private static void PrintLibrary(Library library)
-    {
-        /*foreach (var book in library.books.OrderByDescending(x=>x.price).ThenBy(x=>x.author))
-        {
-            Console.WriteLine($"{book.author} -> {book.price:F2}");
-        }*/
+    private static void PrintLibrary(Library library) {
+        List<Book> booksList = library.getBooks();
+
+        Collections.sort(booksList, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                Double x1 = ((Book) o1).getPrice();
+                Double x2 = ((Book) o2).getPrice();
+                int sComp = x2.compareTo(x1);
+
+                if (sComp != 0) {
+                    return sComp;
+                } else {
+                    String y1 = ((Book) o2).getAuthor();
+                    String y2 = ((Book) o1).getAuthor();
+                    return y2.compareTo(y1);
+                }
+            }
+        });
+
+      //  System.out.println(1221);
+
+        for (Book stud : booksList) {
+            System.out.printf("%s -> %.2f%n", stud.getAuthor(), stud.getPrice());
+        }
+
+
     }
+
 }
 class Library
 {

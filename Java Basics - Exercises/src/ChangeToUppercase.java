@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
 /**
@@ -6,32 +9,49 @@ import java.util.Scanner;
 public class ChangeToUppercase {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        String text = in.nextLine();
-        int start = 0;
-        int end = 0;
-        StringBuilder sb = new StringBuilder();
+        String firstLine = in.nextLine();
+        String secondLine = in.nextLine();
 
-        while (true) {
-            start = text.indexOf("<upcase>");
-            end = text.indexOf("</upcase>");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate firstDate = LocalDate.parse(firstLine, formatter);
+        LocalDate secondDate = LocalDate.parse(secondLine, formatter);
 
-            if (start == -1 && end == -1) {
-                break;
+        long days = ChronoUnit.DAYS.between(firstDate, secondDate);
+
+        int daysCounter = 0;
+        for (int i = 0; i <= days; i++) {
+            boolean isWorkDay = checkIfHoliday(firstDate);
+
+            if (!isWorkDay) {
+                daysCounter++;
             }
-            String subText = text.substring(start + 8, end).toUpperCase();
+            firstDate = firstDate.plusDays(1);
+        }
+        System.out.println(daysCounter);
+    }
 
-            for (int i = 0; i < start; i ++) {
-                sb.append(text.charAt(i));
-            }
-            sb.append(subText);
-            for (int i = end + 9; i < text.length(); i ++) {
-                sb.append(text.charAt(i));
-            }
-
-            text = sb.toString();
-            sb.setLength(0);
+    private static boolean checkIfHoliday(LocalDate date) {
+        if ((date.getDayOfMonth() == 1 && date.getMonth().getValue() == 1) ||
+                (date.getDayOfMonth() == 3 && date.getMonth().getValue() == 3) ||
+                (date.getDayOfMonth() == 1 && date.getMonth().getValue() == 5) ||
+                (date.getDayOfMonth() == 6 && date.getMonth().getValue() == 5) ||
+                (date.getDayOfMonth() == 24 && date.getMonth().getValue() == 5) ||
+                (date.getDayOfMonth() == 6 && date.getMonth().getValue() == 9) ||
+                (date.getDayOfMonth() == 22 && date.getMonth().getValue() == 9) ||
+                (date.getDayOfMonth() == 1 && date.getMonth().getValue() == 11) ||
+                (date.getDayOfMonth() == 24 && date.getMonth().getValue() == 12) ||
+                (date.getDayOfMonth() == 25 && date.getMonth().getValue() == 12) ||
+                (date.getDayOfMonth() == 26 && date.getMonth().getValue() == 12)
+                ) {
+            return true;
+        } else if (
+                (date.getDayOfWeek().getValue() == 6) ||
+                        (date.getDayOfWeek().getValue() == 7)
+                ) {
+            return true;
+        } else {
+            return false;
         }
 
-        System.out.println(text);
     }
 }

@@ -23,27 +23,9 @@ public class AverageGrades {
     }
 
     private static void PrintStudents(List<Student> students) {
-        Comparator<Student> comparator = Comparator.comparing(stud -> stud.name);
-        comparator = comparator.thenComparing(Comparator.comparing(stud -> stud.grade));
-        Stream<Student> personStream = students.stream().sorted(comparator);
-        List<Student> sortedStudents = personStream.collect(Collectors.toList());
-
-        order(sortedStudents);
-
-        System.out.println(33);
-        for (Student stud: sortedStudents) {
-            System.out.printf("%s -> %.2f%n", stud.getName(),stud.getGrade());
-        }
-
-
-
-    }
-    private static void order(List<Student> persons) {
-
-        Collections.sort(persons, new Comparator() {
-
-            public int compare(Object o1, Object o2) {
-
+        Collections.sort(students, new Comparator<Student>() {
+            @Override
+            public int compare(Student o1, Student o2) {
                 String x1 = ((Student) o1).getName();
                 String x2 = ((Student) o2).getName();
                 int sComp = x1.compareTo(x2);
@@ -53,10 +35,18 @@ public class AverageGrades {
                 } else {
                     Double y1 = ((Student) o2).getGrade();
                     Double y2 = ((Student) o1).getGrade();
-                    return x1.compareTo(x2);
+                    return y1.compareTo(y2);
                 }
-            }});
+            }
+        });
+
+        for (Student stud : students) {
+            System.out.printf("%s -> %.2f%n", stud.getName(), stud.getGrade());
+        }
+
+
     }
+
     private static void MakeStudents(List<Double> grades, String[] studentInfo, String name, List<Student> students) {
         for (int j = 1; j < studentInfo.length; j++) {
             grades.add(Double.parseDouble(studentInfo[j]));
@@ -71,7 +61,7 @@ public class AverageGrades {
     }
 }
 
-class Student{
+class Student {
     public Double grade;
     public String name;
 
@@ -95,25 +85,4 @@ class Student{
         this.grade = grade;
         this.name = name;
     }
-
-    /*public int compareTo(Student p)
-    {
-        return getName().compareTo(p.getName());
-    }
-
-    static class AgeComparator implements Comparator<Student>
-    {
-        public int compare(Student p1, Student p2)
-        {
-            double age1 = p1.getGrade();
-            double age2 = p2.getGrade();
-
-            if (age1 == age2)
-                return 0;
-            else if (age1 > age2)
-                return 1;
-            else
-                return -1;
-        }
-    }*/
 }

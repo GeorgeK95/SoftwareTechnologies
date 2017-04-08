@@ -16,10 +16,38 @@ public class CountWorkingDays {
         try {
             Date startDate = sdf.parse(firstInput);
             Date endDate = sdf.parse(secondInput);
-            int result = getWorkingDaysBetweenTwoDates(startDate, endDate);
-            System.out.println(result + 1);
+            int counter = 0;
+
+            while (true) {
+                //Date currentDate = new Date();
+
+                if (startDate.equals(endDate)) {
+                    break;
+                }
+
+                //Date date; // your date
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(startDate);
+
+                if (cal.DAY_OF_WEEK != Calendar.SATURDAY &&cal.DAY_OF_WEEK != Calendar.SUNDAY ){
+                    counter++;
+                }
+
+                String dt = startDate.toString();  // Start date
+                //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Calendar c = Calendar.getInstance();
+                c.setTime(sdf.parse(dt));
+                c.add(Calendar.DATE, 1);  // number of days to add
+                dt = sdf.format(c.getTime());
+
+                startDate = sdf.parse(dt);
+            }
+
+            System.out.println(counter);
+            /*int result = getWorkingDaysBetweenTwoDates(startDate, endDate);
+            System.out.println(result + 1);*/
         } catch (ParseException e) {
-            System.out.println("Error in date parsing.");
+            System.err.println("Error in date parsing.");
         }
     }
 
@@ -65,8 +93,8 @@ public class CountWorkingDays {
             if (startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
                 //if (!holidays.contains(startCal.get(Calendar.)))
                 boolean check = false;
-                for (Date current: holidays) {
-                    if (current.equals(startCal)){
+                for (Date current : holidays) {
+                    if (current.equals(startCal)) {
                         check = true;
                     }
                 }
