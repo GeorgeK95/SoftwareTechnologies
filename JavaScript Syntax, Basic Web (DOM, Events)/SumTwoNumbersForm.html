@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sum Two Numbers</title>
+</head>
+<body>
+    <form>
+        <label for="num1">First Number</label>
+        <input type="number" id="num1"/>
+        <label for="num2">Second Number</label>
+        <input type="number" id="num2"/>
+        <input type="button" value="Calculate" onclick="sumNumbers()">
+    </form>
+    <div>Result: <span id="result"></span></div>
+
+    <script>
+        function sumNumbers() {
+            let first = document.getElementById("first-number").value;
+            let second = document.getElementById("second-number").value;
+            let sum = Number(first) + Number(second);
+            document.getElementById("result").innerHTML = sum;
+        }
+    </script>
+</body>
+</html>
+
