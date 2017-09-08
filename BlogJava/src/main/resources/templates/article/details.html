@@ -12,7 +12,6 @@
                     <small class="author" th:text="${article.author.fullName}"></small>
 
                     <footer>
-
                         <div class="pull-right">
                             <th:block sec:authorize="isAuthenticated()"
                                       th:if="${user.isAdmin() OR user.isAuthor(article)}">
